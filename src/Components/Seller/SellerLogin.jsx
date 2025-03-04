@@ -3,6 +3,7 @@ import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
+import validator from "validator";
 
 const SellerLogin = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,27 @@ const SellerLogin = () => {
   const [error, setError] = useState("");
 
   const handleUser = () => {
-    console.log(BASE_URL);
+    console.log("HELLO HONEY");
+    if (!validator.isEmail(email)) {
+      setError("Enter a valid email Id");
+      return;
+    }
+    if (!password) {
+      setError("Enter a password");
+      return;
+    }
+    if(!validator.isStrongPassword(password)){
+      setError("Enter a strong password");
+      return;
+    }
+
+
     if (isSignup) {
+      if (!name || !shopname) {
+        const field = !name ? "Name" : "Shopname"
+        setError(`${field} cannot be empty`);
+        return
+      }
       signUp();
     } else {
       signIn();
