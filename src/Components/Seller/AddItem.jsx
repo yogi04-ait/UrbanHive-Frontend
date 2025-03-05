@@ -82,10 +82,10 @@ const AddItem = () => {
       <label>Product Name</label>
       <input
         placeholder="Type here"
-        className="font-normal text-lg w-full border px-2 py-1 outline-pink-300  rounded-md"
+        className="font-normal text-lg w-full border px-2 py-1 outline-pink-300  rounded-md outline-none"
       />
       <label>Product description</label>
-      <textarea className="border outline-pink-200 h-16 rounded-md" />
+      <textarea className="border outline-pink-200 h-16 rounded-md outline-none py-1 px-2 font-normal text-lg" placeholder="Write content here" />
       <div className="flex gap-10">
         <div className="flex flex-col gap-3">
           <label htmlFor="product-category">Product Category</label>
@@ -115,26 +115,26 @@ const AddItem = () => {
         </div>
         <div className="flex flex-col gap-3 ">
           <label>Product Price</label>
-          <input className="border rounded-md p-1.5" />
+          <input className="border rounded-md p-1.5 outline-none" />
         </div>
       </div>
       <label>Product Sizes and Quantity</label>
       <div className="flex gap-4">
         <div className="flex flex-col gap-2">
           <p className="bg-gray-300 p-1 px-2 w-fit">S</p>
-          <input type="number" className="w-8 border px-2 py-1" />
+          <input type="number" className="w-8 border px-2 py-1 outline-none" />
         </div>
         <div className="flex flex-col gap-2">
           <p className="bg-gray-300 p-1 px-2 w-fit">M</p>
-          <input type="number" className="w-8 border px-2 py-1" />
+          <input type="number" className="w-8 border px-2 py-1 outline-none" />
         </div>
         <div className="flex flex-col gap-2">
           <p className="bg-gray-300 p-1 px-2 w-fit">L</p>
-          <input type="number" className="w-8 border px-2 py-1" />
+          <input type="number" className="w-8 border px-2 py-1 outline-none" />
         </div>
         <div className="flex flex-col gap-2">
           <p className="bg-gray-300 p-1 px-2 w-fit">XL</p>
-          <input type="number" className="w-8 border px-2 py-1 no-spinner" />
+          <input type="number" className="w-8 border px-2 py-1 outline-none" />
         </div>
       </div>
 
