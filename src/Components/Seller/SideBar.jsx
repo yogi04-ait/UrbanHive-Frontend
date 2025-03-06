@@ -1,25 +1,56 @@
 import React from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { BsFillBoxSeamFill } from "react-icons/bs";
+import { NavLink } from "react-router-dom"; // Corrected to "react-router-dom"
+
+const getActiveClass = ({ isActive }) =>
+  isActive ? "bg-pink-100 border-pink-300" : "";
 
 const SideBar = () => {
   return (
-    <div className="flex gap-0 ml-7 font-[Outfit] ">
+    <div className="flex gap-0 ml-7 font-[Outfit]">
       <div className="flex flex-col gap-4 mt-7 pl-3">
-        <div className="flex gap-3 p-2 border w-48 rounded-l-sm border-r-0 border-gray-300 text-md ">
+        <NavLink
+          to="/seller/add"
+          className={({ isActive }) =>
+            `flex gap-3 p-2 border w-48 rounded-l-sm border-r-0 border-gray-300 text-md ${getActiveClass(
+              {
+                isActive,
+              }
+            )}`
+          }
+        >
           <MdAddCircleOutline className="w-6 h-6" />
           Add Items
-        </div>
-        <div className="flex gap-3 p-2 border w-48 rounded-l-sm border-r-0 border-gray-300 text-md ">
+        </NavLink>
+        <NavLink
+          to="/seller/products"
+          className={({ isActive }) =>
+            `flex gap-3 p-2 border w-48 rounded-l-sm border-r-0 border-gray-300 text-md ${getActiveClass(
+              {
+                isActive,
+              }
+            )}`
+          }
+        >
           <BsFillBoxSeamFill className="w-6 h-6" />
           List Items
-        </div>
-        <div className="flex gap-3 p-2 border w-48 rounded-l-sm border-r-0 border-gray-300 text-md ">
+        </NavLink>
+        <NavLink
+          to="/seller/orders"
+          className={({ isActive }) =>
+            `flex gap-3 p-2 border w-48 rounded-l-sm border-r-0 border-gray-300 text-md ${getActiveClass(
+              {
+                isActive,
+              }
+            )}`
+          }
+        >
           <BsFillBoxSeamFill className="w-6 h-6" />
           Orders
-        </div>
+        </NavLink>
       </div>
-      <div class="h-screen w-px bg-gray-500"></div>
+      <div className="h-screen w-px bg-gray-500"></div>
     </div>
   );
 };

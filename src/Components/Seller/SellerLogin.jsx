@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { addSeller } from "../../utils/sellerSlice";
 
 const SellerLogin = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +17,30 @@ const SellerLogin = () => {
   const [shopname, setShopname] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const seller = useSelector((store) => store.seller);
 
   const notify = (msg) => toast(msg);
+
+  const fetchSeller = async () => {
+    if (seller) return;
+    try {
+      const res = await axios.get(BASE_URL + "/seller/profile", {
+        withCredentials: true,
+      });
+      if (res.status === 201) {
+        navigate("/seller/add");
+        dispatch(addSeller(res.data.data));
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchSeller();
+  }, []);
+
+  if (seller) navigate("/seller/add");
 
   const handleUser = () => {
     if (!validator.isEmail(email)) {
@@ -57,13 +82,30 @@ const SellerLogin = () => {
       );
       if (res.status === 201) {
         notify("Registered successfully");
+        dispatch(addSeller(res.data.data));
+        navigate("/seller/add");
       }
     } catch (error) {
       setError(error?.response?.data?.error || "Something went wrong");
     }
   };
 
-  const signIn = () => {};
+  const signIn = async () => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/seller/login",
+        { email, password },
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        notify("Login successfully");
+        console.log(res.data.data);
+        dispatch(addSeller(res.data.data));
+        navigate("/seller/add");
+      }
+    } catch (error) {}
+  };
+
   return (
     <>
       <ToastContainer />

@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Item from "../Seller/Item";
+import axios from "axios";
+import { BASE_URL } from "../../utils/constants";
 
 const ProductList = () => {
+
+  const getProducts = async ()=>{
+      try {
+        const res = await axios.get(BASE_URL + "/seller/profile",{withCredentials:true});
+        console.log(res)
+        
+      } catch (error) {
+        
+      }
+  }
+
+  useEffect(getProducts,[])
+
   return (
     <div className="w-full flex flex-col gap-1 py-7 px-12 font-[Outfit]">
       <h1 className="mb-2 text-gray-500 font-semibold">All Products List</h1>

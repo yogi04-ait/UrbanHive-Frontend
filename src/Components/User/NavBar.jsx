@@ -67,7 +67,7 @@ const NavBar = () => {
           </NavLink>
         </ul>
         <button className="font-semibold cursor-pointer text-gray-600 rounded-3xl hidden md:block whitespace-nowrap px-5 py-0.5 border-gray-500 border ">
-          <NavLink to="/" target="_blank">
+          <NavLink to="/seller" target="_blank">
             Seller Panel
           </NavLink>
         </button>

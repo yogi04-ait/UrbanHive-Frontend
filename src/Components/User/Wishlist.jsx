@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useSelector } from "react-redux"
 
 
 const Wishlist = () => {
@@ -7,7 +6,12 @@ const Wishlist = () => {
 
   return (
     <div>
-
+      <h1 className="text-2xl p-5">Your Wishlist</h1>
+      <div className="flex flex-wrap">
+        <div>
+          <img />
+        </div>
+      </div>
     </div>
   )
 }
