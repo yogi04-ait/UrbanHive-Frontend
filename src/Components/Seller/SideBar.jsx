@@ -50,7 +50,7 @@ const SideBar = () => {
           Orders
         </NavLink>
       </div>
-      <div className="h-screen w-px bg-gray-500"></div>
+      <div className="h-full min-h-screen w-px bg-gray-500"></div>
     </div>
   );
 };

@@ -103,7 +103,9 @@ const SellerLogin = () => {
         dispatch(addSeller(res.data.data));
         navigate("/seller/add");
       }
-    } catch (error) {}
+    } catch (error) {
+        setError(error?.response?.data?.error || "Something went wrong");
+    }
   };
 
   return (

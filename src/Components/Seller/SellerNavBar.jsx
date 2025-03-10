@@ -3,7 +3,7 @@ import Logo from "../../assets/Logo.png";
 import { BASE_URL } from "../../utils/constants";
 import { addSeller, removeSeller } from "../../utils/sellerSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import axios from "axios";
 
 const SellerNavBar = () => {
@@ -26,7 +26,7 @@ const SellerNavBar = () => {
         <img src={Logo} alt="Urban Hive" className="w-32 cursor-pointer" />
         <div className="flex gap-3 mr-3">
           <button className="px-5 p-1 text-white font-semibold cursor-pointer bg-[#4B5563] rounded-2xl">
-            Profile
+            <NavLink to="/seller/profile">Profile</NavLink>
           </button>
           <button
             className="px-5 p-1 text-white font-semibold cursor-pointer bg-[#4B5563] rounded-2xl"
