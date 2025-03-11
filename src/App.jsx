@@ -1,7 +1,12 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import "react-toastify/dist/ReactToastify.css";
+import WomenProducts from "./Components/User/WomenProducts";
+import MenProducts from "./Components/User/MenProducts";
+import KidProducts from "./Components/User/KidsProduct";
 const Homepage = lazy(() => import("./Pages/Homepage"));
 const Sellerpage = lazy(() => import("./Pages/Sellerpage"));
 const Home = lazy(() => import("./Components/User/Home"));
@@ -19,12 +24,16 @@ const Profile = lazy(() => import("./Components/Seller/Profile"));
 const App = () => {
   return (
     <Provider store={appStore}>
+      <ToastContainer autoClose={2500} />
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Homepage />}>
               <Route index element={<Home />} />
               <Route path="feed" element={<Feed />} />
+              <Route path="/products/women" element={<WomenProducts />} />
+              <Route path="/products/men" element={<MenProducts />} />
+              <Route path="/products/kids" element={<KidProducts />} />
               <Route path="login" element={<UserLogin />} />
               <Route path="profile" element={<UserProfile />} />
               <Route path="wishlist" element={<Wishlist />} />

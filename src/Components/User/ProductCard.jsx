@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
@@ -31,10 +30,12 @@ const ProductCard = ({ id, name, price, image }) => {
         });
 
         if (res.status === 200) {
-          dispatch(removeFromWishlist(id))
+          dispatch(removeFromWishlist(id));
           setColor(false);
+          toast.info("Product removed from wishlist");
         } else {
-          throw new Error("Failed to remove product from wishlist");
+          toast.error("Failed to remove product");
+          throw new Error("Failed to remove");
         }
       } else {
         res = await axios.post(
@@ -44,15 +45,16 @@ const ProductCard = ({ id, name, price, image }) => {
         );
 
         if (res.status === 200) {
-           dispatch(addToWishlist(id))
+          dispatch(addToWishlist(id));
           setColor(true);
+          toast.success("Product added to wishlist");
         } else {
+          toast.error("Failed to Add");
           throw new Error("Failed to add product to wishlist");
         }
       }
     } catch (error) {
-      console.error("Error handling wishlist operation:", error.message);
-      //   notify(`Error: ${error.message || "Something went wrong"}`);
+        toast.error(`Error: ${error.message || "Something went wrong"}`);
     }
   };
 

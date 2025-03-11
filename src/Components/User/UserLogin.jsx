@@ -7,7 +7,7 @@ import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router";
 import { BASE_URL } from "../../utils/constants";
 import validator from "validator";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 const UserLogin = () => {
   const [error, setError] = useState("");
@@ -19,50 +19,52 @@ const UserLogin = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const notify = (msg) => toast(msg);
 
   if (user) navigate("/profile");
 
   const handleLogin = async () => {
-     if (!validator.isEmail(email)) {
-       setError("Enter a valid email Id");
-       return;
-     }
-     if (!password) {
-       setError("Enter a password");
-       return;
-     }
+    if (!validator.isEmail(email)) {
+      setError("Enter a valid email Id");
+      return;
+    }
+    if (!password) {
+      setError("Enter a password");
+      return;
+    }
     try {
       const res = await axios.post(
         BASE_URL + "/login",
         { email, password },
         { withCredentials: true }
       );
-      dispatch(addUser(res?.data?.data));
-      return navigate("/");
+
+      if (res.status === 200) {
+        dispatch(addUser(res?.data?.data));
+        return navigate("/");
+      }
     } catch (error) {
-      setError(error?.response?.data || "Something went wrong");
+
+      setError(error?.response?.data?.error || "Something went wrong");
     }
   };
 
   const handleSignUp = async () => {
+    if (!name) {
+      setError("Enter name");
+    }
 
-        if(!name){
-          setError("Enter name")
-        }
-
-        if (!validator.isEmail(email)) {
-          setError("Enter a valid email Id");
-          return;
-        }
-        if (!password) {
-          setError("Enter a password");
-          return;
-        }
-        if (!validator.isStrongPassword(password)) {
-          setError("Enter a strong password");
-          return;
-        }
+    if (!validator.isEmail(email)) {
+      setError("Enter a valid email Id");
+      return;
+    }
+    if (!password) {
+      setError("Enter a password");
+      return;
+    }
+    if (!validator.isStrongPassword(password)) {
+      setError("Enter a strong password");
+      return;
+    }
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
@@ -71,9 +73,11 @@ const UserLogin = () => {
       );
       dispatch(addUser(res.data.data));
       if (res.status === 201) {
-        notify("Registered successfully");
+        toast.success("Registered successfully");
+        dispatch(addUser(res.data.data));
+        return navigate("/");
+
       }
-      return navigate("/");
     } catch (error) {
       console.log(error);
       setError(error?.response?.data?.error || "Something went wrong");
@@ -82,7 +86,6 @@ const UserLogin = () => {
 
   return (
     <div className="flex flex-col mt-24 items-center gap-5">
-      <ToastContainer />
       <h1 className="text-4xl">{isSignUp ? "Sign Up" : "Login"} </h1>
       <div className="flex flex-col gap-5 w-[30%]">
         {isSignUp && (

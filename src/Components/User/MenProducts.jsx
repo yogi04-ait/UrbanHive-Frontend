@@ -2,19 +2,14 @@ import ProductCard from "./ProductCard";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { useState, useEffect } from "react";
-import { animateScroll as scroll } from "react-scroll";
-import Select from "react-select";
+import { animateScroll as scroll} from "react-scroll";
 
-const Feed = () => {
+
+const MenProducts = () => {
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("men");
   const [subCategory, setSubCategory] = useState("");
   const [sort, setSort] = useState("");
-
-  const sortOptions = [
-    { value: "price_asc", label: "Price: Low to High" },
-    { value: "price_desc", label: "Price: High to Low" },
-  ];
 
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -40,10 +35,10 @@ const Feed = () => {
       });
       setProducts(res?.data?.data);
       setPagination(res?.data?.pagination);
-      scroll.scrollToTop({
-        duration: 500,
-        smooth: true,
-      });
+       scroll.scrollToTop({
+         duration: 500,
+         smooth: true,
+       });
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +46,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [pagination.currentPage, sort]);
+  }, [pagination.currentPage]);
 
   const handleNextPage = () => {
     if (pagination.currentPage < pagination.totalPages) {
@@ -59,6 +54,7 @@ const Feed = () => {
         ...prevState,
         currentPage: prevState.currentPage + 1,
       }));
+      
     }
   };
 
@@ -73,26 +69,6 @@ const Feed = () => {
 
   return (
     <div>
-      <Select
-        name="sort"
-        value={sort}
-        onChange={(selectedOption) => setSort(selectedOption.value)}
-        isClearable={true}
-        isSearchable={true}
-        options={sortOptions}
-        getOptionLabel={(option) => option.label}
-        getOptionValue={(option) => option.value}
-        placeholder={
-          sort
-            ? sort === "price_asc"
-              ? "Low to High"
-              : "High to Low"
-            : "Sort By"
-        }
-        classNamePrefix="select"
-        className="w-[120px] sm:w-[200px] text-black outline-none"
-      />
-
       <div className="w-full h-full flex flex-col items-start px-5 xl:px-10 py-10 gap-10">
         {products.length <= 0 ? (
           <div>Loading...</div>
@@ -157,4 +133,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default MenProducts;

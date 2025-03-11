@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import validator from "validator";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addSeller } from "../../utils/sellerSlice";
@@ -20,8 +20,6 @@ const SellerLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const seller = useSelector((store) => store.seller);
-
-  const notify = (msg) => toast(msg);
 
   const fetchSeller = async () => {
     if (seller) return;
@@ -40,7 +38,6 @@ const SellerLogin = () => {
     fetchSeller();
   }, []);
 
-  if (seller) navigate("/seller/add");
 
   const handleUser = () => {
     if (!validator.isEmail(email)) {
@@ -81,7 +78,7 @@ const SellerLogin = () => {
         { withCredentials: true }
       );
       if (res.status === 201) {
-        notify("Registered successfully");
+        toast.success("Registered successfully");
         dispatch(addSeller(res.data.data));
         navigate("/seller/add");
       }
@@ -98,95 +95,89 @@ const SellerLogin = () => {
         { withCredentials: true }
       );
       if (res.status === 200) {
-        notify("Login successfully");
-        console.log(res.data.data);
+        toast.success("Login successfully");
         dispatch(addSeller(res.data.data));
         navigate("/seller/add");
       }
     } catch (error) {
-        setError(error?.response?.data?.error || "Something went wrong");
+      setError(error?.response?.data?.error || "Something went wrong");
     }
   };
 
   return (
-    <>
-      <ToastContainer />
-      <div className="w-full h-screen  flex justify-center items-center bg-gray-100">
-        <div className="flex flex-col relative w-[75%] sm:w-1/2 md:w-1/3  lg:w-1/4 bg-white  gap-4 rounded-md p-5 ">
-          <h1 className="font-bold text-xl">Seller Panel</h1>
-          {isSignup && (
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold text-gray-700">
-                Name
-              </label>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your name"
-                className="border border-gray-500 p-2 placeholder:text-gray-400  outline-none rounded-md"
-              />
-            </div>
-          )}
+    <div className="w-full h-screen  flex justify-center items-center bg-gray-100">
+      <div className="flex flex-col relative w-[75%] sm:w-1/2 md:w-1/3  lg:w-1/4 bg-white  gap-4 rounded-md p-5 ">
+        <h1 className="font-bold text-xl">Seller Panel</h1>
+        {isSignup && (
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-gray-700">
-              Email Address
-            </label>
+            <label className="text-sm font-semibold text-gray-700">Name</label>
             <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter you email"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
               className="border border-gray-500 p-2 placeholder:text-gray-400  outline-none rounded-md"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-gray-700">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                type={viewPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                className="border border-gray-500 w-full p-2  placeholder:text-gray-400  outline-none rounded-md"
-              />
-              <div
-                className="absolute  top-3 right-2 "
-                onClick={() => setViewPassword(!viewPassword)}
-              >
-                {viewPassword ? <FaEye /> : <FaEyeSlash />}
-              </div>
+        )}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-gray-700">
+            Email Address
+          </label>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter you email"
+            className="border border-gray-500 p-2 placeholder:text-gray-400  outline-none rounded-md"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-gray-700">
+            Password
+          </label>
+          <div className="relative">
+            <input
+              type={viewPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              className="border border-gray-500 w-full p-2  placeholder:text-gray-400  outline-none rounded-md"
+            />
+            <div
+              className="absolute  top-3 right-2 "
+              onClick={() => setViewPassword(!viewPassword)}
+            >
+              {viewPassword ? <FaEye /> : <FaEyeSlash />}
             </div>
           </div>
-          {isSignup && (
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold text-gray-700">
-                Shop Name
-              </label>
-              <input
-                value={shopname}
-                onChange={(e) => setShopname(e.target.value)}
-                placeholder="Enter you shop name"
-                className="border border-gray-500 p-2 placeholder:text-gray-400  outline-none rounded-md"
-              />
-            </div>
-          )}
-          {error && <p className="text-red-500 text-center">{error}</p>}
-          <p
-            className="font-semibold text-sm text-gray-600 absolute right-5 cursor-pointer bottom-16  "
-            onClick={() => setIsSignup(!isSignup)}
-          >
-            {isSignup ? "Login Here" : "Create account"}
-          </p>
-          <button
-            className="w-full cursor-pointer text-white p-2 rounded-md font-semibold bg-black mt-5"
-            onClick={handleUser}
-          >
-            {isSignup ? "Sign Up" : "Sign In"}
-          </button>
         </div>
+        {isSignup && (
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-semibold text-gray-700">
+              Shop Name
+            </label>
+            <input
+              value={shopname}
+              onChange={(e) => setShopname(e.target.value)}
+              placeholder="Enter you shop name"
+              className="border border-gray-500 p-2 placeholder:text-gray-400  outline-none rounded-md"
+            />
+          </div>
+        )}
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        <p
+          className="font-semibold text-sm text-gray-600 absolute right-5 cursor-pointer bottom-16  "
+          onClick={() => setIsSignup(!isSignup)}
+        >
+          {isSignup ? "Login Here" : "Create account"}
+        </p>
+        <button
+          className="w-full cursor-pointer text-white p-2 rounded-md font-semibold bg-black mt-5"
+          onClick={handleUser}
+        >
+          {isSignup ? "Sign Up" : "Sign In"}
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

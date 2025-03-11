@@ -26,8 +26,7 @@ const NavBar = () => {
         withCredentials: true,
       });
       dispatch(addUser(res.data.data));
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -89,7 +88,7 @@ const NavBar = () => {
           <IoIosSearch className="text-gray-500" />
         </form>
         {user && (
-          <NavLink to="/favorite" className="relative hidden lg:block">
+          <NavLink to="/wishlist" className="relative hidden lg:block">
             <FaRegHeart className="w-6 h-6 cursor-pointer" />
             <span className="absolute w-5 h-5 -top-3 -right-3 bg-red-500 text-white rounded-full flex justify-center items-center text-sm p-2">
               {user.wishlist.length}

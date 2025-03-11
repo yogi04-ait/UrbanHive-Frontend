@@ -3,7 +3,7 @@ import uploadImg from "../../assets/upload.png";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 const AddItem = () => {
   const [images, setImages] = useState([null, null, null, null]);
@@ -42,8 +42,6 @@ const AddItem = () => {
     newImages[index] = event.target.files[0];
     setImages(newImages);
   };
-
-  const notify = (msg) => toast(msg);
 
   const handleDeleteImage = (index, event) => {
     event.stopPropagation();
@@ -110,10 +108,10 @@ const AddItem = () => {
         response.data &&
         response.data.message === "Product uploaded successfully"
       ) {
-        notify("Product added successfully!");
+        toast.success("Product added successfully!");
         resetForm();
       } else {
-        notify(
+        toast.error(
           "Failed to upload product: " +
             (response.data.message || "Unknown error")
         );
@@ -164,9 +162,6 @@ const AddItem = () => {
   };
 
   return (
-    <>
-      <ToastContainer />
-
       <form
         className="flex flex-col p-10 font-[Outfit] text-gray-500 gap-3 font-semibold"
         onSubmit={handleSubmit}
@@ -252,7 +247,6 @@ const AddItem = () => {
           {loading ? "Uploading" : "Add Product"}
         </button>
       </form>
-    </>
   );
 };
 
