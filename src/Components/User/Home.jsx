@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div className="w-full h-full flex flex-col justify-start px-5 xl:px-10 py-10 gap-10">
       <div className="border m-[3vw] mx-[7vw] flex h-[70vh] justify-between">
-        <div className="flex flex-col gap-3 font-[Outfit] lg:text-lg md:text-sm text-xs text-gray-700 text-center justify-center items-center w-[40vw] ">
+        <div className="flex flex-col gap-3 font-[Outfit] lg:text-lg md:text-sm text-xs text-gray-700 text-center justify-center items-center w-[40vw]">
           <p>OUR BESTSELLERS</p>
           <h1 className="text-2xl md:text-5xl whitespace-nowrap">
             Latest Arrivals

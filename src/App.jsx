@@ -7,6 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import WomenProducts from "./Components/User/WomenProducts";
 import MenProducts from "./Components/User/MenProducts";
 import KidProducts from "./Components/User/KidsProduct";
+import Footer from "./Pages/Footer";
+import Product from "./Components/User/Product";
+import Cart from "./Components/User/Cart";
 const Homepage = lazy(() => import("./Pages/Homepage"));
 const Sellerpage = lazy(() => import("./Pages/Sellerpage"));
 const Home = lazy(() => import("./Components/User/Home"));
@@ -30,13 +33,15 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />}>
               <Route index element={<Home />} />
-              <Route path="feed" element={<Feed />} />
+              <Route path="/feed" element={<Feed />} />
               <Route path="/products/women" element={<WomenProducts />} />
               <Route path="/products/men" element={<MenProducts />} />
               <Route path="/products/kids" element={<KidProducts />} />
-              <Route path="login" element={<UserLogin />} />
-              <Route path="profile" element={<UserProfile />} />
-              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="/login" element={<UserLogin />} />
+              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/product/:id" element={<Product />} />
             </Route>
 
             <Route path="/seller/login" element={<SellerLogin />} />
@@ -48,6 +53,7 @@ const App = () => {
               <Route path="profile" element={<Profile />} />
             </Route>
           </Routes>
+          <Footer />
         </Suspense>
       </Router>
     </Provider>

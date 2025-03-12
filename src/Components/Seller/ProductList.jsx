@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Item from "../Seller/Item";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
+import { animateScroll as scroll } from "react-scroll";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,11 @@ const ProductList = () => {
       );
       setProducts(res?.data?.products);
       setPagination(res?.data?.pagination);
+
+      scroll.scrollToTop({
+        duration: 500,
+        smooth: true,
+      });
     } catch (error) {
       console.error("Error fetching products:", error);
     }

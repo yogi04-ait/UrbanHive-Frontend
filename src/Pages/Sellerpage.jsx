@@ -51,6 +51,7 @@ const Sellerpage = () => {
         <SideBar />
         <Outlet />
       </div>
+      <div className="w-screen h-px mb-7 bg-gray-500"></div>
     </div>
   );
 };

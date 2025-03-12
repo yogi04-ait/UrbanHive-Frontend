@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import sellerReducer from "./sellerSlice"
 import wishlistReducer from "./wishlistSlice"
+import cartReducer from "./cartSlice";
 
 
 const appStore = configureStore({
@@ -9,6 +10,7 @@ const appStore = configureStore({
         user:userReducer,
         wishlist:wishlistReducer,
         seller:sellerReducer,
+        cart:cartReducer
     }
 })
 

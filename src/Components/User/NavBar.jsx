@@ -17,6 +17,8 @@ const NavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const user = useSelector((store) => store.user);
+  const cart = useSelector((store) => store.cart);
+
   const dispatch = useDispatch();
 
   const fetchUser = async () => {
@@ -25,7 +27,9 @@ const NavBar = () => {
       const res = await axios.get(BASE_URL + "/profile", {
         withCredentials: true,
       });
-      dispatch(addUser(res.data.data));
+      if (res.status === 200) {
+        dispatch(addUser(res.data.data));
+      }
     } catch (error) {}
   };
 
@@ -98,7 +102,7 @@ const NavBar = () => {
         <NavLink to="/cart" className="relative hidden lg:block">
           <FaCartArrowDown className="w-6 h-6 cursor-pointer" />
           <span className="absolute w-5 h-5 -top-3 -right-3 bg-red-500 text-white rounded-full flex justify-center items-center text-sm p-2">
-            0
+            {cart.length}
           </span>
         </NavLink>
         <NavLink
@@ -148,6 +152,9 @@ const NavBar = () => {
             <div className="bg-white absolute top-20 right-0 w-48 h-fit slide-left shadow-xl rounded-bl z-20">
               <ul className="flex flex-col items-start justify-center gap-2 py-3 px-4 font-satoshi text-base font-normal text-light-gray-100">
                 <NavLink to="/" className={getActiveClass}>
+                  <li>Home</li>
+                </NavLink>
+                <NavLink to="/feed" className={getActiveClass}>
                   <li>Shop</li>
                 </NavLink>
                 <NavLink to="/products/men" className={getActiveClass}>
