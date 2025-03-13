@@ -108,19 +108,19 @@ const UpdateProduct = () => {
 
   const renderImagePreviews = () => {
     return images.map((image, index) => (
-      <div key={index} className="relative w-40 h-60 rounded-md ">
+      <div key={index} className="relative w-full h-full">
         {image ? (
           <img
             src={image}
             alt={`uploaded-${index}`}
-            className="w-full h-full object-fill rounded-md"
+            className="w-16 sm:w-26 "
           />
         ) : (
           <div className="w-full h-full flex justify-center items-center bg-gray-200 rounded-md">
             <img
               src={uploadImg}
               alt="upload placeholder"
-              className="w-10 h-10"
+              className="w-16 sm:w-26 "
             />
           </div>
         )}

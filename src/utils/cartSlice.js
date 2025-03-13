@@ -5,22 +5,27 @@ const cart = createSlice({
     initialState: [],
     reducers: {
         addToCart: (state, action) => {
-            const { id, size, quantity } = action.payload;
-            const item = state.find((product) => product.id === id && item.size === size);
+            const { id, name, size, quantity, image, availableQuantity } = action.payload;
+            const item = state.find((product) => product.productId === id && product.size === size);
 
             if (!item) {
-                const product = { productId: id, size: size, quantity: quantity };
+                const product = { productId: id, name: name, image: image, size: size, quantity: quantity, availableQuantity: availableQuantity };
                 state.push(product);
             } else {
-                item.quantity = quantity;
+                item.quantity = quantity,
+                    item.availableQuantity = availableQuantity
             }
 
 
         },
         removeItem: (state, action) => {
-            const { id, size } = action.payload
-            state = state.filter((item) => !(item.id === id && item.size === size));
+            const { id, size } = action.payload;
+            const index = state.findIndex((product) => product.productId === id && product.size === size);
 
+            if (index !== -1) {
+                // Directly mutating the state to remove the item
+                state.splice(index, 1);
+            }
         },
 
         resetCart: (state, action) => {
@@ -28,8 +33,8 @@ const cart = createSlice({
         },
 
         updateQuantity: (state, action) => {
-            const { id,size, isadd } = action.payload;
-            const item = state.find((item) => item.id === id && item.size === size);
+            const { id, size, isadd = false } = action.payload;
+            const item = state.find((product) => product.productId === id && product.size === size);
 
             if (item) {
                 if (isadd) {
