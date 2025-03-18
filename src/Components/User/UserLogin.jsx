@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router";
 import { BASE_URL } from "../../utils/constants";
 import validator from "validator";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const UserLogin = () => {
   const [error, setError] = useState("");
@@ -20,7 +20,9 @@ const UserLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  if (user) navigate("/profile");
+  useEffect(() => {
+    if (user) navigate("/profile");
+  }, []);
 
   const handleLogin = async () => {
     if (!validator.isEmail(email)) {
@@ -43,7 +45,6 @@ const UserLogin = () => {
         return navigate("/");
       }
     } catch (error) {
-
       setError(error?.response?.data?.error || "Something went wrong");
     }
   };
@@ -76,7 +77,6 @@ const UserLogin = () => {
         toast.success("Registered successfully");
         dispatch(addUser(res.data.data));
         return navigate("/");
-
       }
     } catch (error) {
       console.log(error);
@@ -87,7 +87,7 @@ const UserLogin = () => {
   return (
     <div className="flex flex-col mt-24 items-center gap-5">
       <h1 className="text-4xl">{isSignUp ? "Sign Up" : "Login"} </h1>
-      <div className="flex flex-col gap-5 w-[30%]">
+      <div className="flex flex-col gap-5 w-[30%] min-w-3xs">
         {isSignUp && (
           <input
             placeholder="Name"

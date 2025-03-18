@@ -90,7 +90,7 @@ const ProductList = () => {
     <>
       {isModalOpen && (
         <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+          <div className="bg-white p-6 rounded-lg shadow-lg min-w-3xs w-1/3 ">
             <p>Are you sure you want to delete this product?</p>
             <div className="mt-4 flex justify-between">
               <button
@@ -109,9 +109,10 @@ const ProductList = () => {
           </div>
         </div>
       )}
-      <div className="w-full flex flex-col gap-1 py-7 px-12 font-[Outfit]">
+      
+      <div className="w-full flex flex-col gap-1 py-7  px-12 font-[Outfit]">
         <h1 className="mb-2 text-gray-500 font-semibold">All Products List</h1>
-        <div className="bg-gray-100 flex justify-between p-0.5 pl-3 pr-10 text-gray-600">
+        <div className="bg-gray-100 hidden md:flex justify-between p-0.5 pl-3 pr-10 text-gray-600">
           <div className="flex gap-24 min-w-2xs">
             <p className="font-semibold">Image</p>
             <p className="font-semibold">Name</p>

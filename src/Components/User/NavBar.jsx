@@ -49,13 +49,15 @@ const NavBar = () => {
     isActive ? "text-gray-900 font-semibold" : "";
 
   return (
-    <nav className="w-full h-full flex items-center justify-between px-5 xl:px-10 py-5">
+    <nav className="w-full h-full flex items-center justify-between px-5 lg:px-10 py-5">
       <section className=" h-full flex items-center justify-start gap-1 sm:gap-2 ">
-        <img
-          src={Logo}
-          alt="Logo"
-          className="w-32 object-cover object-center mr-7"
-        />
+        <a href="/" className="w-32 object-cover object-center mr-7">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-32 object-cover object-center"
+          />
+        </a>
         <ul className="hidden lg:flex gap-10 text-base font-weight-450 text-gray-600">
           <NavLink to="/" className={getActiveClass}>
             <li>Home</li>
@@ -80,7 +82,7 @@ const NavBar = () => {
         </button>
       </NavLink>
 
-      <section className=" h-full flex items-center justify-end gap-7 sm:gap-10">
+      <section className=" h-full flex items-center justify-end gap-10 sm:gap-8">
         <form className="hidden sm:flex items-center bg-slate-100 px-3 py-2 gap-2">
           <input
             type="text"
@@ -105,12 +107,30 @@ const NavBar = () => {
             {cart.length}
           </span>
         </NavLink>
-        <NavLink
-          to={user ? "" : "/login"}
-          className={`relative hidden lg:block ${user ? "group" : ""}`}
-        >
-          <FaRegUser className="w-6 h-6 cursor-pointer" />
-        </NavLink>
+        <div className={`relative hidden lg:block  ${user ? "group" : ""}`}>
+          <NavLink to={user ? "/profile" : "/login"}>
+            <FaRegUser className={`w-6 h-6 cursor-pointer`} />
+          </NavLink>
+          <div className="absolute right-1  hidden group-hover:block  group-hover:opacity-100 pt-1 mt-0.5 transition-opacity delay-700 z-10 duration-300 ease-in-out">
+            <div className="flex flex-col items-center  w-32 bg-slate-100 font-[Outfit] text-lg font-medium py-3 px-5 z-10 text-gray-500 rounded">
+              <NavLink
+                to="/profile"
+                className="cursor-pointer hover:text-black"
+              >
+                Profile
+              </NavLink>
+              <NavLink to="/orders" className="cursor-pointer hover:text-black">
+                Orders
+              </NavLink>
+              <NavLink
+                className="cursor-pointer hover:text-black"
+                onClick={handleLogout}
+              >
+                Logout
+              </NavLink>
+            </div>
+          </div>
+        </div>
 
         <section className="block sm:hidden">
           <IoIosSearch
@@ -177,15 +197,23 @@ const NavBar = () => {
                 <NavLink to="/cart" className={getActiveClass}>
                   <li>My Cart</li>
                 </NavLink>
+                <NavLink to="/orders" className={getActiveClass}>
+                  <li>My Orders</li>
+                </NavLink>
                 {!user && (
                   <NavLink to="/login" className={getActiveClass}>
                     <li>Login</li>
                   </NavLink>
                 )}
                 {user && (
-                  <NavLink to="/profile" className={getActiveClass}>
-                    <li>My Profile</li>
-                  </NavLink>
+                  <>
+                    <NavLink to="/profile" className={getActiveClass}>
+                      <li>My Profile</li>
+                    </NavLink>
+                    <button onClick={handleLogout} className="cursor-pointer">
+                      <li>Logout</li>
+                    </button>
+                  </>
                 )}
                 <NavLink to="/" target="_blank" className={getActiveClass}>
                   <li>Seller Panel</li>

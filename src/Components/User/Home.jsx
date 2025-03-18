@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import hero from "../../assets/hero.png";
+import hero from "../../assets/hero.jpg";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
+import { NavLink } from "react-router";
 const Home = () => {
   const [products, setProducts] = useState([]);
 
@@ -22,26 +23,36 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col justify-start px-5 xl:px-10 py-10 gap-10">
-      <div className="border m-[3vw] mx-[7vw] flex h-[70vh] justify-between">
-        <div className="flex flex-col gap-3 font-[Outfit] lg:text-lg md:text-sm text-xs text-gray-700 text-center justify-center items-center w-[40vw]">
+    <div className="w-full h-full flex flex-col font-[Outfit] justify-start px-5 xl:px-10 py-10 gap-10">
+      <div className="border flex flex-col-reverse sm:h-[70vh]  sm:flex-row sm:justify-between w-[80vw] m-[3vw]  mx-[7vw] ">
+        <div className="w-full h-full py- text-center lg:text-lg md:text-sm text-xs text-gray-700 flex flex-col justify-center font-semibold sm:font-normal items-center gap-3 sm:w-[40vw]">
           <p>OUR BESTSELLERS</p>
-          <h1 className="text-2xl md:text-5xl whitespace-nowrap">
+          <h1 className=" text-sm sm:text-2xl  md:text-5xl sm:whitespace-nowrap">
             Latest Arrivals
           </h1>
-          <p>SHOP NOW</p>
+          <NavLink
+            to="/feed"
+            className="hover:bg-gray-300 py-2 cursor-pointer px-4 rounded-sm"
+          >
+            SHOP NOW
+          </NavLink>
         </div>
         <div>
-          <img src={hero} alt="Hero-Image" className="w-[40vw] h-full" />
+          <img
+            src={hero}
+            alt="Girl with shopping bags"
+            className="w-full h-full sm:w-[40vw]"
+            loading="lazy"
+          />
         </div>
       </div>
       <div className="flex items-center justify-center gap-2 ">
-        <p className="text-xl md:text-2xl lg:text-4xl mb-2 font-[Outfit] text-gray-700 font-medium">
+        <p className="text-sm sm:text-xl md:text-2xl lg:text-4xl mb-2 font-[Outfit] text-gray-700 font-medium">
           <span className="text-gray-500">LATEST</span> COLLECTIONS
         </p>
-        <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700"></p>
+        <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] max-sm:mb-2 bg-gray-700 self-center "></p>
       </div>
-      <p className="text-center font-[Outfit] tracking-wide text-gray-500 font-semibold">
+      <p className="text-center font-[Outfit] tracking-wide px-3 text-gray-500 font-semibold">
         Discover the Latest Trends and Unveil Your Perfect Style with Our Newest
         Collections!
       </p>

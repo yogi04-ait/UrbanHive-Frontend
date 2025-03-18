@@ -90,7 +90,7 @@ const WomenProducts = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-end  px-10 xl:px-20 gap-5 ">
+      <div className="w-full flex justify-end px-10 xl:px-20 gap-5 ">
         <Select
           name="sort"
           value={subCategory}
@@ -128,11 +128,11 @@ const WomenProducts = () => {
           className="w-[150px] sm:w-[180px] text-black outline-none  "
         />
       </div>
-      <div className="w-full h-full flex flex-col items-start px-5 xl:px-10 py-10 gap-10">
+      <div className="w-full h-full flex flex-col  items-start px-5 xl:px-10 py-10 gap-10">
         {products.length <= 0 ? (
           <div>Loading...</div>
         ) : (
-          <div className="w-full h-full flex flex-wrap gap-10  ">
+          <div className="w-full h-full flex flex-wrap gap-10   ">
             {products.map((product) => {
               return (
                 <ProductCard

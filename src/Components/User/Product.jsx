@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useParams } from "react-router";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ const Product = () => {
   const [isQuantityUpdate, setIsQuantityUpdate] = useState(false);
   const [isProductInCard, setIsProductInCard] = useState(false);
   const [isOutOfStock, setIsOutOfStock] = useState(false);
+  const navigate = useNavigate();
 
   const handleQuantity = (operation) => {
     const item = product.sizes.find((item) => item.size === selectedSize);
@@ -81,6 +82,7 @@ const Product = () => {
         name: product?.name,
         image: product?.images[0]?.imageUrls,
         size: selectedSize,
+        price: product?.price,
         quantity,
         availableQuantity: item.quantity,
       })
@@ -113,12 +115,11 @@ const Product = () => {
         withCredentials: true,
       });
       setProduct(res.data);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Product not found");
+      navigate("/feed");
+    }
   };
-
-  useEffect(() => {
-    console.log(product);
-  }, [product]);
 
   const checkForCart = () => {
     try {

@@ -6,7 +6,7 @@ import Logo from "../assets/Logo.png";
 const Footer = () => {
   return (
     <>
-      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 lg:mx-40 mx-10 sm:mx-16 md:mx-32  mt-2 mb-10 text-sm">
+      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 lg:mx-40 mx-8 sm:mx-16 md:mx-32  mt-2 mb-10 text-sm">
         <div className="flex flex-col gap-5">
           <img src={Logo} className="mb-1 w-32" alt="Logo"></img>
           <p className="w-full md:w-2/3 text-gray-600">

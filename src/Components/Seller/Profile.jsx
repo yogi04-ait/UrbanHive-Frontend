@@ -2,22 +2,21 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { addSeller } from "../../utils/sellerSlice";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 
 const Profile = () => {
   const seller = useSelector((store) => store.seller);
-  const [name, setName] = useState(seller.name);
-  const [email, setEmail] = useState(seller.email);
-  const [shopName, setShopName] = useState(seller.shopName);
+  const [name, setName] = useState(seller.name || "");
+  const [email, setEmail] = useState(seller.email || "");
+  const [shopName, setShopName] = useState(seller.shopName || "");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
   const [viewNewPassword, setViewNewPassword] = useState(false);
   const [error, setError] = useState("");
-  const notify = (msg) => toast(msg);
   const dispatch = useDispatch();
 
   const updateProfile = async () => {
@@ -27,7 +26,7 @@ const Profile = () => {
         { name, email, shopName, oldPassword, newPassword },
         { withCredentials: true }
       );
-      notify("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
       dispatch(addSeller(res?.data?.data));
     } catch (error) {
       setError(error?.response?.data?.message || "Something went wrong");
@@ -36,8 +35,7 @@ const Profile = () => {
 
   return (
     <>
-      <ToastContainer />
-      <div className="flex flex-col w-[30%] mt-3 mx-20 gap-2 bg-gray-200 px-14 py-10 h-fit rounded-lg">
+      <div className="flex flex-col min-w-[320px] w-[90vw] sm:w-[60%] md:w-[45%]  lg:w-[35%] mt-7 mb-10  mx-auto gap-2 bg-gray-200 px-7 md:px-14 py-6 md:py-10 h-fit rounded-lg">
         <div className="flex flex-col gap-1">
           <label>Name</label>
           <input

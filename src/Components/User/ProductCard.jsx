@@ -21,7 +21,7 @@ const ProductCard = ({ id, name, price, image }) => {
     setColor(isFav);
   }, []);
 
-  const handleFav = async () => {
+  const handleFav = async (e) => {
     try {
       let res;
       if (color) {
@@ -54,44 +54,44 @@ const ProductCard = ({ id, name, price, image }) => {
         }
       }
     } catch (error) {
-        toast.error(`Error: ${error.message || "Something went wrong"}`);
+      toast.error(`Error: ${error.message || "Something went wrong"}`);
     }
   };
 
   return (
     <>
       <section className="w-[282px] h-[440px] flex flex-col items-start justify-start gap-2 rounded cursor-pointer">
-        <NavLink to={`/product/${id}`} >
-          <div className="w-full h-[370px] relative overflow-hidden rounded">
-            <section className="w-[282px] h-[370px] object-cover object-center rounded overflow-hidden hover:scale-110 transition-all duration-300 ease-in-out">
+        <div className="w-full h-[370px] relative overflow-hidden rounded">
+          <section className="w-[282px] h-[370px] object-cover object-center rounded overflow-hidden hover:scale-110 transition-all duration-300 ease-in-out">
+            <NavLink to={`/product/${id}`}>
               <LazyLoadImage
                 alt={name}
                 effect="blur"
                 src={image}
                 className="w-full h-full object-cover object-center rounded"
               />
-            </section>
-            <section className="absolute top-5 right-5 bg-white rounded-full p-1">
-              {color ? (
-                <MdOutlineFavorite
-                  className="text-red-500 cursor-pointer"
-                  onClick={() => (user ? handleFav() : navigate("/login"))}
-                />
-              ) : (
-                <MdOutlineFavoriteBorder
-                  className="text-black-100 cursor-pointer"
-                  onClick={() => (user ? handleFav() : navigate("/login"))}
-                />
-              )}
-            </section>
+            </NavLink>
+          </section>
+          <section className="absolute top-5 right-5 bg-white rounded-full p-1">
+            {color ? (
+              <MdOutlineFavorite
+                className="text-red-500 cursor-pointer"
+                onClick={() => (user ? handleFav() : navigate("/login"))}
+              />
+            ) : (
+              <MdOutlineFavoriteBorder
+                className="text-black-100 cursor-pointer"
+                onClick={() => (user ? handleFav() : navigate("/login"))}
+              />
+            )}
+          </section>
+        </div>
+        <article className="w-full flex items-center justify-between gap-2">
+          <div className="w-full flex flex-col justify-between">
+            <h1 className="text-base font-medium text-gray-700">{name}</h1>
           </div>
-          <article className="w-full flex items-center justify-between gap-2">
-            <div className="w-full flex flex-col justify-between">
-              <h1 className="text-base font-medium text-gray-700">{name}</h1>
-            </div>
-            <p>₹{price}</p>
-          </article>
-        </NavLink>
+          <p>₹{price}</p>
+        </article>
       </section>
     </>
   );

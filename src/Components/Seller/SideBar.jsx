@@ -8,7 +8,7 @@ const getActiveClass = ({ isActive }) =>
 
 const SideBar = () => {
   return (
-    <div className="flex gap-0 ml-7 font-[Outfit]">
+    <div className=" ml-7 font-[Outfit]">
       <div className="flex flex-col gap-4 mt-7 pl-3">
         <NavLink
           to="/seller/add"
@@ -50,7 +50,6 @@ const SideBar = () => {
           Orders
         </NavLink>
       </div>
-      <div className="h-full min-h-screen w-px bg-gray-500"></div>
     </div>
   );
 };

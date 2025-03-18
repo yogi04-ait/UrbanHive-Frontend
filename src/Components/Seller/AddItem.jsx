@@ -3,7 +3,7 @@ import uploadImg from "../../assets/upload.png";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const AddItem = () => {
   const [images, setImages] = useState([null, null, null, null]);
@@ -162,92 +162,93 @@ const AddItem = () => {
   };
 
   return (
-      <form
-        className="flex flex-col p-10 font-[Outfit] text-gray-500 gap-3 font-semibold"
-        onSubmit={handleSubmit}
-      >
-        <p>Upload Image</p>
-        <div className="flex gap-4">{renderImagePreviews()}</div>
-        <label>Product Name</label>
-        <input
-          placeholder="Type here"
-          className="font-normal text-lg w-full border px-2 py-1 outline-pink-300  rounded-md outline-none"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label>Product Description</label>
-        <textarea
-          className="border outline-pink-200 h-16 rounded-md outline-none py-1 px-2 font-normal text-lg"
-          placeholder="Write content here"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <div className="flex gap-10">
-          <div className="flex flex-col gap-3">
-            <label htmlFor="product-category">Product Category</label>
-            <select
-              id="product-category"
-              className="w-full p-2 border rounded-md"
-              name="category"
-              value={category}
-              onChange={handleChange}
-            >
-              <option value="men">Men</option>
-              <option value="women">Women</option>
-              <option value="kids">Kids</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-3">
-            <label htmlFor="sub-category">Sub Category</label>
-            <select
-              id="sub-category"
-              className="w-full p-2 border rounded-md"
-              name="sub-category"
-              value={subCategory}
-              onChange={(e) => setSubCategory(e.target.value)}
-            >
-              <option value="topwear">Topwear</option>
-              <option value="bottomwear">Bottomwear</option>
-              <option value="winterwear">Winterwear</option>
-              <option value="ethnicwear">Ethnicwear</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-3">
-            <label>Product Price</label>
+    <form
+      className="flex flex-col p-10 font-[Outfit] text-gray-500 gap-3 font-semibold"
+      onSubmit={handleSubmit}
+    >
+      <p>Upload Image</p>
+      <div className="flex gap-4">{renderImagePreviews()}</div>
+      <label>Product Name</label>
+      <input
+        placeholder="Type here"
+        className="font-normal text-lg w-full border px-2 py-1 outline-pink-300  rounded-md outline-none"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <label>Product Description</label>
+      <textarea
+        className="border outline-pink-200 h-16 rounded-md outline-none py-1 px-2 font-normal text-lg"
+        placeholder="Write content here"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <div className="flex gap-10">
+        <div className="flex flex-col gap-3">
+          <label htmlFor="product-category">Product Category</label>
+          <select
+            id="product-category"
+            className="w-full p-2 border rounded-md"
+            name="category"
+            value={category}
+            onChange={handleChange}
+          >
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="kids">Kids</option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-3">
+          <label htmlFor="sub-category">Sub Category</label>
+          <select
+            id="sub-category"
+            className="w-full p-2 border rounded-md"
+            name="sub-category"
+            value={subCategory}
+            onChange={(e) => setSubCategory(e.target.value)}
+          >
+            <option value="topwear">Topwear</option>
+            <option value="bottomwear">Bottomwear</option>
+            <option value="winterwear">Winterwear</option>
+            <option value="ethnicwear">Ethnicwear</option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-3">
+          <label>Product Price</label>
+          <input
+            className="border rounded-md p-1.5 outline-none"
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <label>Product Sizes and Quantity</label>
+      <div className="flex gap-4">
+        {["S", "M", "L", "XL"].map((size) => (
+          <div key={size} className="flex flex-col gap-2">
+            <p className="bg-gray-300 p-1 px-2 w-10 text-center">{size}</p>
             <input
-              className="border rounded-md p-1.5 outline-none"
               type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              value={sizes[size]}
+              className="w-10 border px-2 py-1 outline-none"
+              onChange={(e) => handleSizeChange(size, e)}
             />
           </div>
-        </div>
+        ))}
+      </div>
 
-        <label>Product Sizes and Quantity</label>
-        <div className="flex gap-4">
-          {["S", "M", "L", "XL"].map((size) => (
-            <div key={size} className="flex flex-col gap-2">
-              <p className="bg-gray-300 p-1 px-2 w-10 text-center">{size}</p>
-              <input
-                type="number"
-                value={sizes[size]}
-                className="w-10 border px-2 py-1 outline-none"
-                onChange={(e) => handleSizeChange(size, e)}
-              />
-            </div>
-          ))}
-        </div>
+      {error && <p className="text-red-500 text-center mt-2">{error}</p>}
 
-        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
-
-        <button
-          className="bg-black text-white w-fit px-5 py-2"
-          disabled={loading}
-        >
-          {loading ? "Uploading" : "Add Product"}
-        </button>
-      </form>
+      <button
+        className={`bg-black  text-white w-fit px-5 py-2 ${
+          loading ? "cursor-progress" : "cursor-pointer"
+        }`}
+        disabled={loading}
+      >
+        {loading ? "Uploading" : "Add Product"}
+      </button>
+    </form>
   );
 };
-
 export default AddItem;

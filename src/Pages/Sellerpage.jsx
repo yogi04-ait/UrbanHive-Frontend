@@ -48,10 +48,13 @@ const Sellerpage = () => {
     <div>
       <SellerNavBar />
       <div className="flex">
-        <SideBar />
+        <div className="hidden  md:flex gap-0">
+          <SideBar />
+          <div className="h-full min-h-screen w-px bg-gray-500"></div>
+        </div>
         <Outlet />
       </div>
-      <div className="w-screen h-px mb-7 bg-gray-500"></div>
+      <div className="w-screen h-px  mb-7 bg-gray-500"></div>
     </div>
   );
 };

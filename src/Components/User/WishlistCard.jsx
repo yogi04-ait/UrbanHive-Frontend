@@ -2,6 +2,7 @@ import React from "react";
 import { MdOutlineFavorite } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { NavLink } from "react-router";
 
 const WishlistCard = ({ id, name, price, image, updateWishlist }) => {
   return (
@@ -9,12 +10,14 @@ const WishlistCard = ({ id, name, price, image, updateWishlist }) => {
       <section className="w-[282px] h-[440px] flex flex-col items-start justify-start  rounded cursor-pointer">
         <div className="w-full h-[370px] relative overflow-hidden rounded">
           <section className="w-[282px] h-[370px] object-cover object-center rounded overflow-hidden hover:scale-110 transition-all duration-300 ease-in-out">
-            <LazyLoadImage
-              alt="Your Image"
-              effect="blur"
-              src={image}
-              className="w-full h-full object-cover object-center rounded"
-            />
+            <NavLink to={`/product/${id}`}>
+              <LazyLoadImage
+                alt="Your Image"
+                effect="blur"
+                src={image}
+                className="w-full h-full object-cover object-center rounded"
+              />
+            </NavLink>
           </section>
           <section className="absolute top-5 right-5 bg-white rounded-full p-1">
             <MdOutlineFavorite

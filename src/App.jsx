@@ -10,7 +10,10 @@ import KidProducts from "./Components/User/KidsProduct";
 import Footer from "./Pages/Footer";
 import Product from "./Components/User/Product";
 import Cart from "./Components/User/Cart";
+import Checkout from "./Components/User/Checkout";
+import UserOrders from "./Components/User/UserOrders";
 const Homepage = lazy(() => import("./Pages/Homepage"));
+const NotFound = lazy(() => import("./Pages/NotFound"));
 const Sellerpage = lazy(() => import("./Pages/Sellerpage"));
 const Home = lazy(() => import("./Components/User/Home"));
 const Feed = lazy(() => import("./Components/User/Feed"));
@@ -41,6 +44,8 @@ const App = () => {
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/orders" element={<UserOrders />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/product/:id" element={<Product />} />
             </Route>
 
@@ -50,8 +55,9 @@ const App = () => {
               <Route path="add" element={<AddItem />} />
               <Route path="orders" element={<Orders />} />
               <Route path="update/:id" element={<UpdateProduct />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="/seller/profile" element={<Profile />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </Suspense>

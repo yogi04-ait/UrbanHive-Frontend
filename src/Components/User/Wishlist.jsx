@@ -9,6 +9,7 @@ import WishlistCard from "./WishlistCard";
 import { removeProduct } from "../../utils/wishlistSlice";
 import { toast } from "react-toastify";
 import { removeFromWishlist } from "../../utils/userSlice";
+import { NavLink } from "react-router";
 const Wishlist = () => {
   const wishlist = useSelector((store) => store.wishlist);
   const navigate = useNavigate();
@@ -48,23 +49,31 @@ const Wishlist = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-xl md:text-2xl lg:text-3xl ml-8 p-5 font-medium font-[Outfit] ">
-        Your Wishlist
-      </h1>
+    <div className="lg:mx-40 mx-10 sm:mx-16 md:mx-32 ">
+      <div className="text-2xl mb-3">
+        <div className="inline-flex gap-2 items-center mb-3">
+          <p className="text-gray-500">
+            YOUR
+            <span className="text-gray-700 font-medium"> WISHLIST</span>
+          </p>
+          <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700"></p>
+        </div>
+      </div>
       <div className="flex flex-wrap">
         {wishlist.length === 0 ? (
-          <div className="w-full h-full flex flex-col items-center justify-center gap-5">
-            <GiShoppingBag className="text-7xl text-blue-800" />
+          <div className="w-full h-[60vh] flex flex-col items-center justify-center gap-5 ">
+            <GiShoppingBag className="text-7xl text-black" />
             <article className="flex flex-col items-center justify-center">
               <h3 className="text-2xl font-medium">Hey, It feels so light!</h3>
-              <p className="text-light-gray text-xs">
+              <p className="text-light-gray text-xs mt-2">
                 There is nothing in your wishlist
               </p>
             </article>
-            <button className="text-white bg-blue-800 px-6 py-2 font-normal rounded">
-              Add Products
-            </button>
+            <NavLink to="/feed">
+              <button className="text-white bg-black px-6 py-2 cursor-pointer font-normal rounded">
+                Add Products
+              </button>
+            </NavLink>
           </div>
         ) : (
           <div className="flex flex-wrap gap-10 items-center w-full h-full mx-10">
