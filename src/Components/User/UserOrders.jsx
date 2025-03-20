@@ -40,6 +40,7 @@ const UserOrders = () => {
         duration: 500,
         smooth: true,
       });
+      
     } catch (error) {
       console.log(error);
     }

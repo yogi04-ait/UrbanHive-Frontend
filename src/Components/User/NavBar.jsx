@@ -12,7 +12,6 @@ import { clearWishlist } from "../../utils/wishlistSlice";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -44,6 +43,10 @@ const NavBar = () => {
       dispatch(removeUser());
       dispatch(clearWishlist());
     } catch (error) {}
+  };
+
+  const handleMenuClose = () => {
+    setToggleMenu(!toggleMenu);
   };
 
   const getActiveClass = ({ isActive }) =>
@@ -161,62 +164,110 @@ const NavBar = () => {
           {toggleMenu ? (
             <MdClose
               className="w-6 h-6 text-light-gray cursor-pointer"
-              onClick={() => setToggleMenu(false)}
+              onClick={handleMenuClose}
             />
           ) : (
             <HiOutlineMenu
               className="w-6 h-6 text-light-gray cursor-pointer"
-              onClick={() => setToggleMenu(true)}
+              onClick={handleMenuClose}
             />
           )}
           {toggleMenu && (
-            <div className="bg-white absolute top-20 right-0 w-48 h-fit slide-left shadow-xl rounded-bl z-20">
+            <div className="bg-white absolute top-16 right-0 w-48 h-fit slide-left shadow-xl rounded-bl z-20">
               <ul className="flex flex-col items-start justify-center gap-2 py-3 px-4 font-satoshi text-base font-normal text-light-gray-100">
-                <NavLink to="/" className={getActiveClass}>
+                <NavLink
+                  to="/"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>Home</li>
                 </NavLink>
-                <NavLink to="/feed" className={getActiveClass}>
+                <NavLink
+                  to="/feed"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>Shop</li>
                 </NavLink>
-                <NavLink to="/products/men" className={getActiveClass}>
+                <NavLink
+                  to="/products/men"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>Men</li>
                 </NavLink>
-                <NavLink to="/products/women" className={getActiveClass}>
+                <NavLink
+                  to="/products/women"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>Women</li>
                 </NavLink>
-                <NavLink to="/products/kids" className={getActiveClass}>
+                <NavLink
+                  to="/products/kids"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>Kids</li>
                 </NavLink>
                 <li>
                   <div className="w-full h-[1px]" />
                 </li>
                 {user && (
-                  <NavLink to="/favorite" className={getActiveClass}>
+                  <NavLink
+                    to="/favorite"
+                    className={getActiveClass}
+                    onClick={handleMenuClose}
+                  >
                     <li>My Wishlist</li>
                   </NavLink>
                 )}
-                <NavLink to="/cart" className={getActiveClass}>
+                <NavLink
+                  to="/cart"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>My Cart</li>
                 </NavLink>
-                <NavLink to="/orders" className={getActiveClass}>
+                <NavLink
+                  to="/orders"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>My Orders</li>
                 </NavLink>
                 {!user && (
-                  <NavLink to="/login" className={getActiveClass}>
+                  <NavLink
+                    to="/login"
+                    className={getActiveClass}
+                    onClick={handleMenuClose}
+                  >
                     <li>Login</li>
                   </NavLink>
                 )}
                 {user && (
                   <>
-                    <NavLink to="/profile" className={getActiveClass}>
+                    <NavLink
+                      to="/profile"
+                      className={getActiveClass}
+                      onClick={handleMenuClose}
+                    >
                       <li>My Profile</li>
                     </NavLink>
-                    <button onClick={handleLogout} className="cursor-pointer">
+                    <button
+                      onClick={handleLogout}
+                      className="cursor-pointer"
+                    >
                       <li>Logout</li>
                     </button>
                   </>
                 )}
-                <NavLink to="/" target="_blank" className={getActiveClass}>
+                <NavLink
+                  to="/seller"
+                  target="_blank"
+                  className={getActiveClass}
+                  onClick={handleMenuClose}
+                >
                   <li>Seller Panel</li>
                 </NavLink>
               </ul>

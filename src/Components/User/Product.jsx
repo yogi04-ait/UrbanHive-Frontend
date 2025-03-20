@@ -8,8 +8,8 @@ import { toast } from "react-toastify";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Lazy from "../LazyLoading/Lazy";
 import { unstable_batchedUpdates } from "react-dom";
+import { animateScroll as scroll } from "react-scroll";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 
 const Product = () => {
   const { id } = useParams();
@@ -112,6 +112,11 @@ const Product = () => {
 
   const fetchProduct = async () => {
     try {
+      scroll.scrollToTop({
+        duration: 500,
+        smooth: true,
+      });
+
       const res = await axios.get(BASE_URL + "/product/" + id, {
         withCredentials: true,
       });
