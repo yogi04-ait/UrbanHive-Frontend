@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
-  BASE_URL,
   statesAndUTsEnum,
   verifyAddress,
 } from "../../utils/constants";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -37,9 +37,6 @@ const Checkout = () => {
 
   if (!user) {
     navigate("/login");
-  }
-  if (cart.length == 0) {
-    navigate("/feed");
   }
 
   function cartTotal() {
@@ -162,6 +159,9 @@ const Checkout = () => {
 
   useEffect(() => {
     fetchAddress();
+    if (cart.length == 0) {
+      navigate("/feed");
+    }
   }, []);
 
   const [modal, setModal] = useState(false);
@@ -216,6 +216,7 @@ const Checkout = () => {
   async function placeOrder() {
     try {
       const orderItems = [];
+      setPlacingOrder(true);
       cart.map((product) => {
         orderItems.push({
           productId: product.productId,
@@ -241,6 +242,8 @@ const Checkout = () => {
       }
     } catch (error) {
       toast.warn(error?.response?.data?.message);
+    } finally {
+      setPlacingOrder(false);
     }
   }
 

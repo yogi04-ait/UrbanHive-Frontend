@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Item from "../Seller/Item";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { animateScroll as scroll } from "react-scroll";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -94,13 +95,13 @@ const ProductList = () => {
             <p>Are you sure you want to delete this product?</p>
             <div className="mt-4 flex justify-between">
               <button
-                className="px-4 py-2 bg-red-600 text-white rounded"
+                className="px-4 py-2 bg-red-600 cursor-pointer text-white rounded"
                 onClick={handleDeleteProduct}
               >
                 Yes
               </button>
               <button
-                className="px-4 py-2 bg-gray-300 text-gray-800 rounded"
+                className="px-4 py-2 bg-gray-300 cursor-pointer text-gray-800 rounded"
                 onClick={closeDeleteModal}
               >
                 No
@@ -109,7 +110,7 @@ const ProductList = () => {
           </div>
         </div>
       )}
-      
+
       <div className="w-full flex flex-col gap-1 py-7  px-12 font-[Outfit]">
         <h1 className="mb-2 text-gray-500 font-semibold">All Products List</h1>
         <div className="bg-gray-100 hidden md:flex justify-between p-0.5 pl-3 pr-10 text-gray-600">

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../../utils/constants";
 import { addList } from "../../utils/wishlistSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -10,6 +9,8 @@ import { removeProduct } from "../../utils/wishlistSlice";
 import { toast } from "react-toastify";
 import { removeFromWishlist } from "../../utils/userSlice";
 import { NavLink } from "react-router";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Wishlist = () => {
   const wishlist = useSelector((store) => store.wishlist);
   const navigate = useNavigate();

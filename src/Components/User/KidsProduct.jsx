@@ -1,9 +1,9 @@
 import ProductCard from "./ProductCard";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import Select from "react-select";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const KidProducts = () => {
   const [products, setProducts] = useState([]);
@@ -131,7 +131,7 @@ const KidProducts = () => {
       </div>
       <div className="w-full h-full flex flex-col items-start px-5 xl:px-10 py-10 gap-10">
         {products.length <= 0 ? (
-          <div className="w-full text-center align-bottom mt-24 text-gray-500">
+          <div className="w-full text-center align-bottom mt-24 h-[22vh] text-gray-500">
             <p>No products matched the filtered search</p>
           </div>
         ) : (

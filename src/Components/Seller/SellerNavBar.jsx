@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import Logo from "../../assets/Logo.png";
-import { BASE_URL } from "../../utils/constants";
-import { addSeller, removeSeller } from "../../utils/sellerSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { removeSeller } from "../../utils/sellerSlice";
+import { useDispatch } from "react-redux";
 import { HiOutlineMenu } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router";
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const SellerNavBar = () => {
   const dispatch = useDispatch();

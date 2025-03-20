@@ -5,9 +5,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router";
-import { BASE_URL } from "../../utils/constants";
 import validator from "validator";
 import { toast } from "react-toastify";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const UserLogin = () => {
   const [error, setError] = useState("");
@@ -45,6 +45,7 @@ const UserLogin = () => {
         return navigate("/");
       }
     } catch (error) {
+      console.log(error);
       setError(error?.response?.data?.error || "Something went wrong");
     }
   };

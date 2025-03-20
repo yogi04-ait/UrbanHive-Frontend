@@ -6,11 +6,12 @@ import { IoIosSearch } from "react-icons/io";
 import { FaCartArrowDown, FaRegUser, FaRegHeart } from "react-icons/fa";
 import { HiOutlineMenu } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
-import { BASE_URL } from "../../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../../utils/userSlice";
 import { clearWishlist } from "../../utils/wishlistSlice";
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState("");

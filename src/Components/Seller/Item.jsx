@@ -1,7 +1,5 @@
 import React from "react";
 import { RxCross1 } from "react-icons/rx";
-import { BASE_URL } from "../../utils/constants";
-import axios from "axios";
 import { NavLink } from "react-router";
 
 const Shimmer = () => {

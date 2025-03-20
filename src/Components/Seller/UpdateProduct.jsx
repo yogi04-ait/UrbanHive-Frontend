@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import uploadImg from "../../assets/upload.png";
-import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router";
 import ShimmerLoader from "../Loader/ShimmerLoader";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -46,11 +46,10 @@ const UpdateProduct = () => {
       const imageUrls = productData.images.map(
         (image) => image.imageUrls || null
       );
-
       setImages(imageUrls);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching product:", error);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -102,6 +101,7 @@ const UpdateProduct = () => {
         notify("Product updated successfully!");
       }
     } catch (error) {
+      setError(error?.response?.data?.message);
       notify("Error in updating the product.");
     }
   };

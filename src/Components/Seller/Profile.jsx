@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { BASE_URL } from "../../utils/constants";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addSeller } from "../../utils/sellerSlice";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Profile = () => {
   const seller = useSelector((store) => store.seller);

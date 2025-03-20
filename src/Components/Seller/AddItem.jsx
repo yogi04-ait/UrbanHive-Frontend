@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import uploadImg from "../../assets/upload.png";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { toast } from "react-toastify";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const AddItem = () => {
   const [images, setImages] = useState([null, null, null, null]);

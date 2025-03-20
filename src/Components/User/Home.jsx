@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import hero from "../../assets/hero.jpg";
 import ProductCard from "./ProductCard";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { NavLink } from "react-router";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Home = () => {
   const [products, setProducts] = useState([]);
 

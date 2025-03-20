@@ -5,9 +5,10 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { addToWishlist, removeFromWishlist } from "../../utils/userSlice";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const ProductCard = ({ id, name, price, image }) => {
   const [color, setColor] = useState(false);

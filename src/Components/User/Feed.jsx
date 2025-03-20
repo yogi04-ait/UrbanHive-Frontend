@@ -1,9 +1,10 @@
 import ProductCard from "./ProductCard";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import Select from "react-select";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const Feed = () => {
   const [products, setProducts] = useState([]);

@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { useParams } from "react-router";
-import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../utils/cartSlice";
 import { toast } from "react-toastify";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Lazy from "../LazyLoading/Lazy";
 import { unstable_batchedUpdates } from "react-dom";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const Product = () => {
   const { id } = useParams();

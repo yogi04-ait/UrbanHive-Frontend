@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import validator from "validator";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addSeller } from "../../utils/sellerSlice";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 const SellerLogin = () => {
   const [email, setEmail] = useState("");
