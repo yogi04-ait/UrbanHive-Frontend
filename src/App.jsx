@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
@@ -55,7 +55,7 @@ const App = () => {
               <Route path="add" element={<AddItem />} />
               <Route path="orders" element={<Orders />} />
               <Route path="update/:id" element={<UpdateProduct />} />
-              <Route path="/seller/profile" element={<Profile />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

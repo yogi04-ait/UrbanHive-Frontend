@@ -50,7 +50,7 @@ const NavBar = () => {
   };
 
   const getActiveClass = ({ isActive }) =>
-    isActive ? "text-gray-900 font-semibold" : "";
+    isActive ? "text-gray-900 font-semibold" : "hover:text-gray-800";
 
   return (
     <nav className="w-full h-full flex items-center justify-between px-5 lg:px-10 py-5">
@@ -62,7 +62,7 @@ const NavBar = () => {
             className="w-32 object-cover object-center"
           />
         </a>
-        <ul className="hidden lg:flex gap-10 text-base font-weight-450 text-gray-600">
+        <ul className="hidden lg:flex gap-10 text-base font-weight-450 text-gray-600 ">
           <NavLink to="/" className={getActiveClass}>
             <li>Home</li>
           </NavLink>
@@ -163,7 +163,7 @@ const NavBar = () => {
         <nav className="block lg:hidden">
           {toggleMenu ? (
             <MdClose
-              className="w-6 h-6 text-light-gray cursor-pointer"
+              className="w-6 h-6 text-light-gray cursor-pointer "
               onClick={handleMenuClose}
             />
           ) : (
@@ -173,7 +173,7 @@ const NavBar = () => {
             />
           )}
           {toggleMenu && (
-            <div className="bg-white absolute top-16 right-0 w-48 h-fit slide-left shadow-xl rounded-bl z-20">
+            <div className="bg-white absolute top-11 right-0 w-48 h-fit slide-left shadow-xl rounded-bl z-20">
               <ul className="flex flex-col items-start justify-center gap-2 py-3 px-4 font-satoshi text-base font-normal text-light-gray-100">
                 <NavLink
                   to="/"
@@ -215,7 +215,7 @@ const NavBar = () => {
                 </li>
                 {user && (
                   <NavLink
-                    to="/favorite"
+                    to="/wishlist"
                     className={getActiveClass}
                     onClick={handleMenuClose}
                   >
@@ -254,10 +254,7 @@ const NavBar = () => {
                     >
                       <li>My Profile</li>
                     </NavLink>
-                    <button
-                      onClick={handleLogout}
-                      className="cursor-pointer"
-                    >
+                    <button onClick={handleLogout} className="cursor-pointer">
                       <li>Logout</li>
                     </button>
                   </>
