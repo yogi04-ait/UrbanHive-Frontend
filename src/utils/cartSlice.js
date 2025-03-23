@@ -16,14 +16,12 @@ const cart = createSlice({
                     item.availableQuantity = availableQuantity
             }
 
-
         },
         removeItem: (state, action) => {
             const { id, size } = action.payload;
             const index = state.findIndex((product) => product.productId === id && product.size === size);
 
             if (index !== -1) {
-                // Directly mutating the state to remove the item
                 state.splice(index, 1);
             }
         },

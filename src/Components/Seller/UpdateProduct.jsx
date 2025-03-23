@@ -4,8 +4,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router";
 import ShimmerLoader from "../Loader/ShimmerLoader";
+import { animateScroll as scroll } from "react-scroll";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -25,6 +25,11 @@ const UpdateProduct = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchProduct = async () => {
+    scroll.scrollToTop({
+      duration: 500,
+      smooth: true,
+    });
+
     try {
       const res = await axios.get(BASE_URL + "/product/" + id, {
         withCredentials: true,

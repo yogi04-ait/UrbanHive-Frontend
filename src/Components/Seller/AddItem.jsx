@@ -5,7 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-
 const AddItem = () => {
   const [images, setImages] = useState([null, null, null, null]);
   const [category, setCategory] = useState("men");
