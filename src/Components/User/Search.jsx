@@ -3,12 +3,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import Select from "react-select";
+import { useParams } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const Feed = () => {
+const Search = () => {
+  const { name } = useParams();
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
   const [sort, setSort] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -16,11 +17,10 @@ const Feed = () => {
     { value: "price_asc", label: "Price: Low to High" },
     { value: "price_desc", label: "Price: High to Low" },
   ];
-  const subCategoryOptions = [
-    { value: "topwear", label: "Topwear" },
-    { value: "winterwear", label: "Winterwear" },
-    { value: "bottomwear", label: "Bottomwear" },
-    { value: "ethnicwear", label: "Ethnicwear" },
+  const categoryOptions = [
+    { value: "men", label: "Men" },
+    { value: "women", label: "Women" },
+    { value: "kids", label: "Kids" },
     { value: "", label: "None" },
   ];
 
@@ -39,16 +39,19 @@ const Feed = () => {
         page: currentPage,
         limit: pageSize,
         category,
-        subCategory,
         sort,
       }).toString();
 
-      const res = await axios.get(`${BASE_URL}/products?${queryParams}`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${BASE_URL}/products/${name}?${queryParams}`,
+        {
+          withCredentials: true,
+        }
+      );
       setProducts(res?.data?.data);
       setPagination(res?.data?.pagination);
       setLoading(false);
+
       scroll.scrollToTop({
         duration: 500,
         smooth: true,
@@ -60,7 +63,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [pagination.currentPage, sort, subCategory]);
+  }, [pagination.currentPage, sort, category, name]);
 
   const handleNextPage = () => {
     if (pagination.currentPage < pagination.totalPages) {
@@ -90,19 +93,23 @@ const Feed = () => {
 
   return (
     <div>
+      <h1 className="text-lg font-semibold md:text-2xl  px-5 xl:px-10 mb-4 mt-2 font-[Outfit] ">
+        Search Results for {name}
+      </h1>
+
       <div className="w-full flex justify-end  px-10 xl:px-20 gap-5 ">
         <Select
           name="sort"
-          value={subCategory}
-          onChange={(selectedOption) => setSubCategory(selectedOption.value)}
+          value={category}
+          onChange={(selectedOption) => setCategory(selectedOption.value)}
           isClearable={true}
           isSearchable={true}
-          options={subCategoryOptions}
+          options={categoryOptions}
           getOptionLabel={(option) => option.label}
           getOptionValue={(option) => option.value}
           placeholder={
-            subCategory
-              ? subCategory.charAt(0).toUpperCase() + subCategory.slice(1)
+            category
+              ? category.charAt(0).toUpperCase() + category.slice(1)
               : "Category"
           }
           classNamePrefix="select"
@@ -128,11 +135,10 @@ const Feed = () => {
           className="w-[150px] sm:w-[180px] text-black outline-none  "
         />
       </div>
-
-      <div className="w-full h-full flex flex-col items-start px-5 xl:px-10 py-10 gap-10 ">
+      <div className="w-full h-full flex flex-col items-start px-5 xl:px-10 py-10 gap-10">
         {products.length <= 0 ? (
-          <div className="w-full text-center align-bottom mt-24 text-gray-500">
-            <p>No products matched the filtered search</p>
+          <div className="w-full text-center align-bottom mt-24 h-[22vh] text-gray-500">
+            <p>No results found for your search query.</p>
           </div>
         ) : (
           <div className="w-full h-full flex flex-wrap gap-10  ">
@@ -198,4 +204,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default Search;

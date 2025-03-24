@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/Logo.png";
-import { NavLink } from "react-router-dom"; // make sure to import from react-router-dom
+import { NavLink, useNavigate } from "react-router-dom"; // make sure to import from react-router-dom
 import { useSelector } from "react-redux";
 import { IoIosSearch } from "react-icons/io";
 import { FaCartArrowDown, FaRegUser, FaRegHeart } from "react-icons/fa";
@@ -18,7 +18,7 @@ const NavBar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const user = useSelector((store) => store.user);
   const cart = useSelector((store) => store.cart);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const fetchUser = async () => {
@@ -48,6 +48,10 @@ const NavBar = () => {
   const handleMenuClose = () => {
     setToggleMenu(!toggleMenu);
   };
+
+  function search() {
+    navigate("/search/" + searchQuery);
+  }
 
   const getActiveClass = ({ isActive }) =>
     isActive ? "text-gray-900 font-semibold" : "hover:text-gray-800";
@@ -87,7 +91,13 @@ const NavBar = () => {
       </NavLink>
 
       <section className=" h-full flex items-center justify-end gap-10 sm:gap-8">
-        <form className="hidden sm:flex items-center bg-slate-100 px-3 py-2 gap-2">
+        <form
+          className="hidden sm:flex items-center bg-slate-100 px-3 py-2 gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            search();
+          }}
+        >
           <input
             type="text"
             placeholder="Search products..."

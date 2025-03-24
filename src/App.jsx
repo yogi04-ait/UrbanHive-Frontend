@@ -1,17 +1,18 @@
 import React, { Suspense, lazy } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import "react-toastify/dist/ReactToastify.css";
-import WomenProducts from "./Components/User/WomenProducts";
-import MenProducts from "./Components/User/MenProducts";
-import KidProducts from "./Components/User/KidsProduct";
-import Footer from "./Pages/Footer";
-import Product from "./Components/User/Product";
-import Cart from "./Components/User/Cart";
-import Checkout from "./Components/User/Checkout";
-import UserOrders from "./Components/User/UserOrders";
+const WomenProducts = lazy(() => import("./Components/User/WomenProducts"));
+const MenProducts = lazy(() => import("./Components/User/MenProducts"));
+const KidProducts = lazy(() => import("./Components/User/KidsProduct"));
+const Footer = lazy(() => import("./Pages/Footer"));
+const Product = lazy(() => import("./Components/User/Product"));
+const Cart = lazy(() => import("./Components/User/Cart"));
+const Checkout = lazy(() => import("./Components/User/Checkout"));
+const UserOrders = lazy(() => import("./Components/User/UserOrders"));
+const Search = lazy(() => import("./Components/User/Search"));
 const Homepage = lazy(() => import("./Pages/Homepage"));
 const NotFound = lazy(() => import("./Pages/NotFound"));
 const Sellerpage = lazy(() => import("./Pages/Sellerpage"));
@@ -47,6 +48,7 @@ const App = () => {
               <Route path="/orders" element={<UserOrders />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/product/:id" element={<Product />} />
+              <Route path="/search/:name" element={<Search />} />
             </Route>
 
             <Route path="/seller/login" element={<SellerLogin />} />
