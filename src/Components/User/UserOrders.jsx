@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { GiShoppingBag } from "react-icons/gi";
 import { NavLink } from "react-router";
 import { formatDate } from "../../utils/constants";

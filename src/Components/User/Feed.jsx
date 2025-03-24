@@ -7,7 +7,6 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Feed = () => {
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [sort, setSort] = useState("");
   const [loading, setLoading] = useState(true);
@@ -38,7 +37,6 @@ const Feed = () => {
       const queryParams = new URLSearchParams({
         page: currentPage,
         limit: pageSize,
-        category,
         subCategory,
         sort,
       }).toString();

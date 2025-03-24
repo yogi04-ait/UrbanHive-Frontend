@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Logo from "../../assets/Logo.png";
 import { NavLink, useNavigate } from "react-router-dom"; // make sure to import from react-router-dom
 import { useSelector } from "react-redux";

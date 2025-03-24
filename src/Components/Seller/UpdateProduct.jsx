@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import uploadImg from "../../assets/upload.png";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import {
-  statesAndUTsEnum,
-  verifyAddress,
-} from "../../utils/constants";
+import { statesAndUTsEnum, verifyAddress } from "../../utils/constants";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -268,7 +265,7 @@ const Checkout = () => {
               Confirm
             </button>
             <button
-              onClick={() => setDeleteAddressModal(false)}
+              onClick={closeModal}
               className="py-1 px-2 cursor-pointer hover:bg-gray-300 rounded-sm"
             >
               Cancel
@@ -328,7 +325,7 @@ const Checkout = () => {
             })}
           </div>
           <button
-            onClick={closeModal}
+            onClick={() => setModal(true)}
             className="mt-3 bottom-2 mx-2 cursor-pointer  text-white bg-black px-3 py-1 w-fit font-semibold rounded-md"
           >
             Add a new address
@@ -415,14 +412,14 @@ const Checkout = () => {
         </div>
       </div>
       {modal && (
-        <div className="flex fixed inset-0  backdrop-blur-md z-40 overflow-scroll bg-white my-auto shadow-lg mx-auto flex-col gap-3 h-fit min-w-[340px] text-sm w-[55vw] lg:w-[42vw] border px-5 py-1 md:py-4 rounded-md ">
+        <div className="flex fixed inset-0  backdrop-blur-md z-40 overflow-auto bg-white my-auto shadow-lg mx-auto flex-col gap-3 h-fit min-w-[340px] text-sm w-[55vw] lg:w-[42vw] border px-5 py-1 md:py-4 rounded-md ">
           <div className="flex justify-between  ">
             <p className="text-lg mb-3 sm:text-xl md:text-2xl font-medium">
               {editAddId ? "Update Address" : "Enter a new delivery address"}{" "}
             </p>
             <IoMdClose
               className="cursor-pointer self-center text-lg sm:text-2xl   "
-              onClick={() => setModal(false)}
+              onClick={closeModal}
             />
           </div>
           <form className=" flex flex-col gap-4">
