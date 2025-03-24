@@ -6,7 +6,6 @@ import CartItem from "./CartItem";
 import { removeItem } from "../../utils/cartSlice";
 import { animateScroll as scroll } from "react-scroll";
 
-
 const Cart = () => {
   const cart = useSelector((store) => store.cart);
   const user = useSelector((store) => store.user);
@@ -15,10 +14,10 @@ const Cart = () => {
   const removeProduct = ({ id, size }) => {
     dispatch(removeItem({ id, size }));
   };
-scroll.scrollToTop({
-  duration: 500,
-  smooth: true,
-});
+  scroll.scrollToTop({
+    duration: 500,
+    smooth: true,
+  });
   function cartTotal() {
     let total = 0;
     cart.forEach((product) => {
@@ -54,7 +53,7 @@ scroll.scrollToTop({
           </button>
         </div>
       ) : (
-        <div className="min-h-[60vh]">
+        <div>
           {cart.map((item) => (
             <CartItem
               item={item}
