@@ -4,6 +4,7 @@ import { NavLink } from "react-router";
 import CartItem from "./CartItem";
 import { removeItem } from "../../utils/cartSlice";
 import { animateScroll as scroll } from "react-scroll";
+import { useEffect } from "react";
 
 const Cart = () => {
   const cart = useSelector((store) => store.cart);
@@ -13,10 +14,14 @@ const Cart = () => {
   const removeProduct = ({ id, size }) => {
     dispatch(removeItem({ id, size }));
   };
-  scroll.scrollToTop({
-    duration: 500,
-    smooth: true,
-  });
+
+  useEffect(() => {
+    scroll.scrollToTop({
+      duration: 500,
+      smooth: true,
+    });
+  }, []);
+
   function cartTotal() {
     let total = 0;
     cart.forEach((product) => {
